@@ -12,7 +12,7 @@ ENV DJANGO_ENV=development
 WORKDIR /app
 
 # Copy the requirements file into the container at /app
-COPY backend/requirements.txt /app/
+COPY /requirements.txt /app/
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --upgrade pip && \
@@ -22,6 +22,10 @@ RUN pip install --upgrade pip && \
 RUN python -m venv venv
 ENV PATH="/app/venv/bin:$PATH"
 
+# Install Django
+RUN pip install django
+#RUN pip install Pillow
+
 
 COPY . /app/
 
@@ -29,7 +33,7 @@ COPY . /app/
 EXPOSE 8000
 
 
-RUN python manage.py collectstatic --noinput
+#RUN python manage.py collectstatic --noinput
 
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python3", "manage.py", "runserver", "0.0.0.0:8000"]
