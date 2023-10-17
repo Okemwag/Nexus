@@ -14,17 +14,15 @@ WORKDIR /app
 # Copy the requirements file into the container at /app
 COPY /requirements.txt /app/
 
-# Install any needed packages specified in requirements.txt
-RUN pip install --upgrade pip && \
-    pip install -r requirements.txt
 
 
 RUN python -m venv venv
 ENV PATH="/app/venv/bin:$PATH"
 
-# Install Django
-RUN pip install django
-#RUN pip install Pillow
+# Install any needed packages specified in requirements.txt
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt
+
 
 
 COPY . /app/
